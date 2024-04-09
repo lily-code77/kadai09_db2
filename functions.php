@@ -74,3 +74,10 @@ function getAllFile()
 
     return $fileData;
 }
+
+//SQLエラー関数：sql_error($stmt)
+function sql_error($stmt)
+{
+    $error = $stmt->errorInfo();
+    exit("SQLError:" . $error[2]);
+}

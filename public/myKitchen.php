@@ -46,12 +46,14 @@ $files = getAllFile();
     <div>
         <?php foreach ($files as $file) { ?>
             <?php if ($file["user_id"] == $login_user['name']) { ?>
+                <!-- <?php var_dump($file) ?> -->
                 <img src="<?php echo "{$file['file_path']}"; ?>" alt="" width="200px">
                 <p>レシピ名：<?php echo "{$file['recipe_name']}"; ?></p>
                 <p>材料：<?php echo "<br>" . nl2br("{$file['ingredients']}"); ?></p>
                 <p>作り方：<?php echo "<br>" . nl2br("{$file['instructions']}"); ?></p>
                 <p>レシピのエピソード：<?php echo "<br>" . nl2br("{$file['episode']}"); ?></p>
-                <!-- <p><?php echo "{$file['file_path']}"; ?></p> -->
+                <p><a href="detail.php?id=<?= h($file["id"]) ?>">更新</a></p>
+                <p><a href="delete.php?id=<?= h($file["id"]) ?>">削除</a></p>
             <?php } ?>
         <?php } ?>
     </div>

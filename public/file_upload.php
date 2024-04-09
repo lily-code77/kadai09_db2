@@ -66,7 +66,5 @@ if (count($err_msgs) === 0) {
     }
 }
 
-
+header("Location: myKitchen.php");
 ?>
-
-<a href="./mypage.php">戻る</a>

@@ -67,6 +67,7 @@ var_dump($v);
         <div class="content">
             料理名：<br><input type="text" name="recipe_name" class="input" value="<?= $v["recipe_name"] ?>"><br>
             写真(.png、.jpg、.gifのみ対応)：<br>
+            <img src="<?php echo "{$v['file_path']}"; ?>" alt="" width="200px"><br>
             <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
             <input type="file" name="img" accept="image/*" value="<?= $v["img"] ?>"><br>
             材料：<br><textarea name="ingredients" class="input big" cols="70" rows="10"><?= $v["ingredients"] ?></textarea><br>

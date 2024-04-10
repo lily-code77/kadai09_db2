@@ -39,6 +39,7 @@ if ($status == false) {
 // var_dump($stmt);
 $v = $stmt->fetch();
 var_dump($v);
+// echo $v["insert_time"];
 ?>
 
 <!DOCTYPE html>
@@ -69,10 +70,11 @@ var_dump($v);
             写真(.png、.jpg、.gifのみ対応)：<br>
             <img src="<?php echo "{$v['file_path']}"; ?>" alt="" width="200px"><br>
             <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-            <input type="file" name="img" accept="image/*" value="<?= $v["img"] ?>"><br>
+            <input type="file" name="img" accept="image/*"><br>
             材料：<br><textarea name="ingredients" class="input big" cols="70" rows="10"><?= $v["ingredients"] ?></textarea><br>
             作り方：<br><textarea name="instructions" class="input big" cols="70" rows="10"><?= $v["instructions"] ?></textarea><br>
             レシピのエピソード：<br><textarea name="episode" id="textarea" cols="70" rows="10"><?= $v["episode"] ?></textarea><br>
+            <input type="hidden" name="insert_time" value="<?= $v["insert_time"] ?>">
             <input type="hidden" name="id" value="<?= $v["id"] ?>">
         </div>
         <button class="b" type="submit">更新</button>

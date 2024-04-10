@@ -24,7 +24,12 @@ $recipe_name   = $_POST['recipe_name'];
 $ingredients   = $_POST["ingredients"];
 $instructions  = $_POST["instructions"];
 $episode       = $_POST["episode"];
+$insert_time   = $_POST["insert_time"];
 $id            = $_POST["id"];
+
+// echo $login_user;
+// echo $id;
+// echo $insert_time;
 
 // ファイルのバリデーション
 // ファイルのサイズが1MG未満か
@@ -49,20 +54,19 @@ if (count($err_msgs) === 0) {
             // $result = fileSave($login_user, $recipe_name, $filename, $save_path, $ingredients, $instructions, $episode);
             $pdo = connect();
             
-            $sql = "UPDATE recipe_registration SET recipe_name=:recipe_name,file_name=:file_name,file_path=:file_path,ingredients=:ingredients,instructions=:instructions,episode=:episode WHERE id=:id";
-            // var_dump($sql);
+            $sql = "UPDATE recipe_registration SET user_id='$login_user',recipe_name=:recipe_name,file_name='$filename',file_path='$save_path',ingredients=:ingredients,instructions=:instructions,episode=:episode,insert_time='$insert_time',update_time=sysdate() WHERE id=:id";
+            var_dump($sql);
             $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':user_id', $login_user, PDO::PARAM_STR);
             $stmt->bindValue(':recipe_name', $recipe_name, PDO::PARAM_STR);
-            $stmt->bindValue(':file_name', $file_name, PDO::PARAM_STR);
-            $stmt->bindValue(':file_path', $file_path, PDO::PARAM_STR);
+            $stmt->bindValue(':file_name', $filename, PDO::PARAM_STR);
+            $stmt->bindValue(':file_path', $save_path, PDO::PARAM_STR);
             $stmt->bindValue(':ingredients', $ingredients, PDO::PARAM_STR);
-            var_dump($stmt);
             $stmt->bindValue(':instructions', $instructions, PDO::PARAM_STR);
             $stmt->bindValue(':episode', $episode, PDO::PARAM_STR);
+            $stmt->bindValue(':insert_time', $insert_time, PDO::PARAM_STR);
             $stmt->bindValue(':id', $id, PDO::PARAM_INT);
             $status = $stmt->execute();
-            echo("here");
-            var_dump($status);
 
             //データ登録処理後
             if($status==false){

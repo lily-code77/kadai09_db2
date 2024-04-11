@@ -54,7 +54,7 @@ if (count($err_msgs) === 0) {
             // $result = fileSave($login_user, $recipe_name, $filename, $save_path, $ingredients, $instructions, $episode);
             $pdo = connect();
             
-            $sql = "UPDATE recipe_registration SET user_id='$login_user',recipe_name=:recipe_name,file_name='$filename',file_path='$save_path',ingredients=:ingredients,instructions=:instructions,episode=:episode,insert_time='$insert_time',update_time=sysdate() WHERE id=:id";
+            $sql = "UPDATE recipe_registration SET user_id=:user_id,recipe_name=:recipe_name,file_name=:file_name,file_path=:file_path,ingredients=:ingredients,instructions=:instructions,episode=:episode,insert_time=:insert_time,update_time=sysdate() WHERE id=:id";
             var_dump($sql);
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':user_id', $login_user, PDO::PARAM_STR);
